@@ -10,7 +10,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.myfirstapplication.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
@@ -32,6 +34,16 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragment_container_view)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        val bottomNav : BottomNavigationView = binding.bottomNav
+        val appBarConfiguration2 = AppBarConfiguration(
+            setOf(
+                R.id.fragment1, R.id.fragment2
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration2)
+        bottomNav.setupWithNavController(navController)
+
 
     }
 
@@ -86,4 +98,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragment_container_view)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()    }
+
+
 }
+
